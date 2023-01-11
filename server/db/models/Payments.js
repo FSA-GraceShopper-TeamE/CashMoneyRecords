@@ -26,3 +26,4 @@ const Payments = db.define('payment', {
         }
     }
 });
+module.exports = Payments;
