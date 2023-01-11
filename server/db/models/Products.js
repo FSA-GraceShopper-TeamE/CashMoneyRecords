@@ -10,40 +10,40 @@ const Products = db.define('product', {
             notEmpty:true
         }
     },
-    SKU:{
+    sku:{
         type: Sequelize.STRING,
         allowNull:false,
         validate:{
             notEmpty:true
         }
     },
-    Price:{
+    price:{
         type: Sequelize.FLOAT,
         allowNull:false,
         validate:{
             isDecimale:true
         }
     },
-    StockQuantity:{
+    stockQuantity:{
         type: Sequelize.INTEGER,
         allowNull:false,
         validate:{
             isInt:true
         }
     },
-    Category:{
+    category:{
         type: Sequelize.STRING,
         allowNull:false,
         validate:{
             notEmpty:true
         }
     },
-    ProductImage:{
+    productImage:{
         type: Sequelize.STRING,
         allowNull:false,
         defaultValue:"default-img.png"
     },
-    Details:{
+    details:{
         type: Sequelize.TEXT,
         allowNull:false
     },
@@ -52,3 +52,5 @@ const Products = db.define('product', {
         allowNull:false,
     }
 })
+
+module.exports = Products;
