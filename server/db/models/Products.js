@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 // this file is used to create a Products model
 const db = require('../db');
-
+// create a products model
 const Products = db.define('product', {
     name:{
         type: Sequelize.STRING,
@@ -21,7 +21,7 @@ const Products = db.define('product', {
         type: Sequelize.FLOAT,
         allowNull:false,
         validate:{
-            isDecimale:true
+            isFloat:true
         }
     },
     stockQuantity:{
@@ -51,6 +51,6 @@ const Products = db.define('product', {
         type:Sequelize.INTEGER,
         allowNull:false,
     }
-})
+});
 
 module.exports = Products;
