@@ -16,7 +16,6 @@ const AllAlbums = () => {
   const dispatch = useDispatch();
 
   const albums = useSelector(selectAlbums);
-  console.log(albums, "albums");
 
   useEffect(() => {
     dispatch(fetchAlbumsAsync());

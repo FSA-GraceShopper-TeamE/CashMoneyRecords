@@ -17,9 +17,9 @@ export const albumsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAlbumsAsync.fulfilled, (state, action) => {
       return action.payload;
-    })
-builder.addCase(fetchAlbumsAsync.rejected, (state, action) =>{
-state.error = action.error; //returns error when rejected
+    }),
+    builder.addCase(fetchAlbumsAsync.rejected, (state, action) =>{
+      state.error = action.error; //returns error when rejected
     })
   },
 });
