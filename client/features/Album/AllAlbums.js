@@ -10,29 +10,16 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 
-import { fetchAlbumsAsync, selectAlbums } from "../../src/albums/albumsSlice";
-
-// import { fetchAlbums } from "../store/allAlbums";
-
-
+import { fetchAlbumsAsync, selectAlbums } from "./albumsSlice";
 
 const AllAlbums = () => {
   const dispatch = useDispatch();
 
   const albums = useSelector(selectAlbums);
-  console.log(albums,'albums')
-
-  // const [albums, setAlbums] = React.useState([]);
-
-  // const albumsList = async () => {
-  //   const { data } = await axios.get("/api/albums");
-  //   return setAlbums(data);
-  // }
-
+  console.log(albums, "albums");
 
   useEffect(() => {
     dispatch(fetchAlbumsAsync());
-    // albumsList()
   }, [dispatch]);
 
   return (
@@ -64,7 +51,6 @@ const AllAlbums = () => {
           <p>No albums...</p>
         )}
       </div>
-
     </div>
   );
 };

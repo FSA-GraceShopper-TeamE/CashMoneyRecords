@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
-import authReducer from '../features/auth/authSlice';
-import albumsReducer from '../features/src/albums/albumsSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import logger from "redux-logger";
+import authReducer from "../features/auth/authSlice";
+import albumsReducer from "../features/Album/albumsSlice";
 const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -11,4 +11,4 @@ const store = configureStore({
 });
 
 export default store;
-export * from '../features/auth/authSlice';
+export * from "../features/auth/authSlice";

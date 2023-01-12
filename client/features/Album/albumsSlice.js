@@ -4,7 +4,6 @@ import axios from "axios";
 export const fetchAlbumsAsync = createAsyncThunk("allAlbums-fetch", async() => {
   try {
     const  {data}  = await axios.get('/api/albums');
-    console.log(data, ">>>>DTATA<<<")
     return data;
   } catch (err) {
     console.log(err);
@@ -27,7 +26,7 @@ state.error = action.error; //returns error when rejected
 
 export const selectAlbums = (state) => {
   return state.albums;
-  
+
 }
 
 export default albumsSlice.reducer;
