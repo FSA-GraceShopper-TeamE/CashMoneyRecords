@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import {
   MDBCard,
   MDBCardBody,
@@ -10,40 +10,36 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 
+import { fetchAlbumsAsync, selectAlbums } from "../../src/albums/albumsSlice";
+
 // import { fetchAlbums } from "../store/allAlbums";
-// import Footer from "./Footer";
 
-
-// const handleUnregister = async (e) => {
-//   const studentId = e.target.value;
-//   await axios.put(`/api/students/${studentId}`);
-//   window.location.reload(true);
-// };
 
 
 const AllAlbums = () => {
-    // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const albums = useSelector((state) => state.albums);
+  const albums = useSelector(selectAlbums);
+  console.log(albums,'albums')
 
-  const [albums, setAlbums] = React.useState([]);
+  // const [albums, setAlbums] = React.useState([]);
 
-  const albumsList = async () => {
-    const { data } = await axios.get("/api/albums");
-    return setAlbums(data);
-  }
+  // const albumsList = async () => {
+  //   const { data } = await axios.get("/api/albums");
+  //   return setAlbums(data);
+  // }
 
 
   useEffect(() => {
-    albumsList()
-
-  }, []);
+    dispatch(fetchAlbumsAsync());
+    // albumsList()
+  }, [dispatch]);
 
   return (
     <div className="home">
       <div className="allAlbums-title"></div>
       <div className="allAlbums">
-        {albums.length ? (
+        {albums ? (
           albums.map((album) => (
             <div key={album.id}>
               <form onSubmit={(ev) => ev.preventDefault()}></form>
@@ -68,7 +64,7 @@ const AllAlbums = () => {
           <p>No albums...</p>
         )}
       </div>
-    {/* //   <Footer /> */}
+
     </div>
   );
 };
