@@ -7,11 +7,11 @@ import { connect } from "react-redux";
  * COMPONENT
  */
 const Home = (props) => {
-  const username = useSelector((state) => state.auth.me.username);
+  const email = useSelector((state) => state.auth.me.email);
 
   return (
     <div>
-      <h3>Welcome, {username}</h3>
+      <h3>Welcome, {email}</h3>
       <AllAlbums />
     </div>
   );

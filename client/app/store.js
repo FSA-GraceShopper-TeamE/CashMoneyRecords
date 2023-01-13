@@ -3,12 +3,13 @@ import logger from "redux-logger";
 import authReducer from "../features/auth/authSlice";
 import albumsReducer from "../features/Album/albumsSlice";
 import singleAlbumReducer from "../features/singleAlbum/singleAlbumSlice";
-
+import cartReducer from '../features/Cart/cartSlice'
 const store = configureStore({
   reducer: {
     auth: authReducer,
     albums: albumsReducer,
-    singleAlbum: singleAlbumReducer
+    singleAlbum: singleAlbumReducer,
+    cart: cartReducer
 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

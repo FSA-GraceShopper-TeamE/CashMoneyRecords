@@ -12,6 +12,8 @@ const Navbar = () => {
     navigate('/login');
   };
 
+
+
   return (
     <div>
       <h1>FS-App-Template</h1>
@@ -23,6 +25,7 @@ const Navbar = () => {
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
+            <Link to="/cart">Cart</Link>
           </div>
         ) : (
           <div>

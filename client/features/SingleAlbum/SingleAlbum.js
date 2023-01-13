@@ -5,6 +5,8 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from 'react-bootstrap/Button';
 import { v4 as uuidv4 } from 'uuid';
+import { addToCartAsync } from "../Cart/cartSlice";
+
 
 import {
   MDBCard,
@@ -32,9 +34,10 @@ const SingleAlbum = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log("clicked");
+    // console.log("clicked", e);
     setAddedToCart(true);
-    // const hasCart = Boolean
+    dispatch(addToCartAsync(e.target.id.value))
+
   }
 
   return (
