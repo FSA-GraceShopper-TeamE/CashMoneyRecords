@@ -11,8 +11,7 @@ import SingleAlbum from "../features/SingleAlbum/SingleAlbum"
  */
 
 const AppRoutes = () => {
-  const isLoggedIn = true;
-  // useSelector((state) => !!state.auth.me.id); thi is as it was provided in the boilerplate.
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
 
   useEffect(() => {

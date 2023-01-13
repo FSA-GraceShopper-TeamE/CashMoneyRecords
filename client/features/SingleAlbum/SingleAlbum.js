@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
+import ListGroup from "react-bootstrap/ListGroup";
+import Button from 'react-bootstrap/Button';
+import { v4 as uuidv4 } from 'uuid';
 // import axios from "axios";
 import {
   MDBCard,
@@ -17,6 +20,8 @@ const SingleAlbum = () => {
   const { id } = useParams()
   const dispatch = useDispatch();
 
+  const [addedToCart, setAddedToCart] = useState(false)
+
   const album = useSelector(selectSingleAlbum);
   const { title, artistName, price, quantity, tracks, staffPick, description, image, genre } = album
   console.log(album, "album");
@@ -24,6 +29,13 @@ const SingleAlbum = () => {
   useEffect(() => {
     dispatch(fetchSingleAlbumAsync(id));
   }, [dispatch]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("clicked");
+    setAddedToCart(true);
+    // const hasCart = Boolean
+  }
 
   return (
         <div className='singleAlbum-container'>
@@ -34,27 +46,27 @@ const SingleAlbum = () => {
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>{description}</Card.Text>
                 <div className='d-grid gap-2'>
-                    {/* <Button
+                    <Button
                     type='submit'
                     variant={addedToCart ? 'success' : 'info'}
-                    onClick={this.handleClick}
+                    onClick={handleClick}
                     >
                     {addedToCart ? 'Item Added' : 'Add To Cart'}
-                    </Button>{' '} */}
+                    </Button>{' '}
                 </div>
                 {/* <Card.Link href="/cart">add to cart</Card.Link> */}
                 </Card.Body>
 
-                {/* <ListGroup className='list-group-flush'>
-                {this.props.singleAlbum.tracks ? (
-                this.props.singleAlbum.tracks.map((track, i) => (
-                    <ListGroup.Item>
-                    {i + 1}. {track}
+                <ListGroup className='list-group-flush'>
+                {tracks ? (
+                tracks.map((track, i) => (
+                  <ListGroup.Item key={uuidv4()}>
+                    {i + 1}.  {track}
                     </ListGroup.Item>
                 ))) : (
                     <div></div>
                 )}
-                </ListGroup> */}
+                </ListGroup>
             </Card>
             </div>
         </div>
