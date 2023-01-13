@@ -28,6 +28,9 @@ const AppRoutes = () => {
         </Routes>
       ) : (
         <Routes>
+          <Route path="/*" element={<Home />} />
+          <Route to="/home" element={<Home />} />
+          <Route path="/albums/:id" element={<SingleAlbum/>}/>
           <Route
             path="/*"
             element={<AuthForm name="login" displayName="Login" />}

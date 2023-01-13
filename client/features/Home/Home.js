@@ -10,11 +10,11 @@ const Home = (props) => {
   const email = useSelector((state) => state.auth.me.email);
 
   return (
-    <div>
-      <h3>Welcome, {email}</h3>
-      <AllAlbums />
-    </div>
-  );
+
+<div>
+
+      <h3> Welcome, {email}</h3>
+      <AllAlbums />    </div>  );
 };
 
 // export default Home;

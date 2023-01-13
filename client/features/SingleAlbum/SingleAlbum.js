@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from 'react-bootstrap/Button';
 import { v4 as uuidv4 } from 'uuid';
-import { addToCartAsync } from "../Cart/cartSlice";
+import { addToCart } from "../Cart/cartSlice";
 
 
 import {
@@ -36,7 +36,7 @@ const SingleAlbum = () => {
     e.preventDefault();
     // console.log("clicked", e);
     setAddedToCart(true);
-    dispatch(addToCartAsync(e.target.id.value))
+    dispatch(addToCart(album))
 
   }
 
