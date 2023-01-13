@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from 'react-bootstrap/Button';
 import { v4 as uuidv4 } from 'uuid';
-// import axios from "axios";
+
 import {
   MDBCard,
   MDBCardBody,
@@ -40,10 +40,11 @@ const SingleAlbum = () => {
   return (
         <div className='singleAlbum-container'>
             <div className='card-container'>
-            <Card className='singleAlbum-card'>
-                <Card.Img variant='top' src={image} />
+            <Card className='singleAlbum-card' style={{display:"flex", flexDirection:"column", textAlign:"center"}}>
+                <img variant='top' src={image} style={{textAlign:"center"}}/>
                 <Card.Body>
                 <Card.Title>{title}</Card.Title>
+                <Card.Title>{artistName}</Card.Title>
                 <Card.Text>{description}</Card.Text>
                 <div className='d-grid gap-2'>
                     <Button
