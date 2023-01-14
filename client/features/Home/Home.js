@@ -12,13 +12,11 @@ const Home = (props) => {
   return (
 
 <div>
-
       <h3> Welcome, {email}</h3>
       <AllAlbums />    </div>  );
 };
 
 // export default Home;
-
 const mapState = (state) => {
   return {
     username: state.auth.username,

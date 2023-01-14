@@ -26,7 +26,6 @@ export const albumsSlice = createSlice({
 
 export const selectAlbums = (state) => {
   return state.albums;
-
 }
 
 export default albumsSlice.reducer;

@@ -1,14 +1,16 @@
-
-
-
+import React, { useEffect, useState } from "react";
 
 // import "./cart.css";
 // import Total from "../components/Total";
-// import CartItem from "../components/CartItem";
+import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 
-function Cart() {
-  const cart = useSelector((state) => state.cart);
+const Cart = () => {
+    const cart = useSelector((state) => state.persistedReducer.cart);
+    const {id, title, artistName, price, quantity } = cart
+   console.log({title})
+   console.log(title)
+   console.log(cart)
 
   return (
     <div className="cart">
@@ -29,7 +31,7 @@ function Cart() {
       </div>
 
       <div className="cart__right">
-        <Total />
+        {/* <Total /> */}
       </div>
     </div>
   );

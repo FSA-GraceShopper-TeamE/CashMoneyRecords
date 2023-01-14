@@ -38,6 +38,7 @@ const SingleAlbum = () => {
     setAddedToCart(true);
     dispatch(addToCart(album))
 
+
   }
 
   return (

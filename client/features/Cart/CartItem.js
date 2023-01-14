@@ -2,9 +2,10 @@
 import {
   incrementQuantity,
   decrementQuantity,
-  removeItem,
-} from "../redux/cartSlice";
+  removeItem
+} from "./cartSlice";
 import { useDispatch } from "react-redux";
+import React from "react";
 
 function CartItem({ id, image, title, price, quantity = 0 }) {
   const dispatch = useDispatch();
