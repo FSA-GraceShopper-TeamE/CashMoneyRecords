@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // import "./cart.css";
-// import Total from "../components/Total";
+import Total from "./TotalCart";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 
@@ -31,7 +31,7 @@ const Cart = () => {
       </div>
 
       <div className="cart__right">
-        {/* <Total /> */}
+        <Total />
       </div>
     </div>
   );

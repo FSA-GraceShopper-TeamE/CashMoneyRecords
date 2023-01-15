@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/Home/Home";
 import { me } from "./store";
-import SingleAlbum from "../features/SingleAlbum/SingleAlbum"
-import Cart from "../features/Cart/Cart.js"
+import SingleAlbum from "../features/SingleAlbum/SingleAlbum";
+import Cart from "../features/Cart/Cart.js";
 
 /**
  * COMPONENT
@@ -25,27 +25,17 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/albums/:id" element={<SingleAlbum/>}/>
+          <Route path="/albums/:id" element={<SingleAlbum />} />
           <Route path="/*" element={<Home />} />
         </Routes>
       ) : (
         <Routes>
-          <Route path="/*" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
-          <Route path="/albums/:id" element={<SingleAlbum/>}/>
-          <Route
-            path="/*"
-            element={<AuthForm name="login" displayName="Login" />}
-          />
-          <Route
-            path="/login"
-            element={<AuthForm name="login" displayName="Login" />}
-          />
-          <Route
-            path="/signup"
-            element={<AuthForm name="signup" displayName="Sign Up" />}
-          />
+          <Route path="/home" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/albums/:id" element={<SingleAlbum />} />
+          <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
+          <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
+          <Route path="/*" element={<AuthForm name="login" displayName="Login" />} />
         </Routes>
       )}
     </div>

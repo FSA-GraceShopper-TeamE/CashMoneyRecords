@@ -1,7 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 function Total() {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.persistedReducer.cart);
+  //   const { id, title, artistName, price, quantity } = cart;
 
   const getTotal = () => {
     let totalQuantity = 0;
