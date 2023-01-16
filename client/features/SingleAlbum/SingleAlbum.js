@@ -26,7 +26,6 @@ const SingleAlbum = () => {
 
   const album = useSelector(selectSingleAlbum);
   const { title, artistName, price, quantity, tracks, staffPick, description, image, genre } = album
-  console.log(album, "album");
 
   useEffect(() => {
     dispatch(fetchSingleAlbumAsync(id));
@@ -34,7 +33,6 @@ const SingleAlbum = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    // console.log("clicked", e);
     setAddedToCart(true);
     dispatch(addToCart(album))
 
