@@ -5,9 +5,11 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 
 
+const states = Object.values(new UsaStates().states).map(
+  ({ abbreviation }) => abbreviation
+);
 
-
-
+const cardTypes = ["VISA", "Mastercard", "American Express"];
 
 
 const Checkout = () => {

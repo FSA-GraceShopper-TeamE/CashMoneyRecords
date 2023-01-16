@@ -35,7 +35,8 @@
     "pg": "^8.8.0",
     "react-bootstrap": "^2.7.0",
     "redux-persist": "^6.0.0",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.25.3",
+    "usa-states": "^0.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",
