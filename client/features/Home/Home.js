@@ -6,14 +6,15 @@ import { connect } from "react-redux";
 /**
  * COMPONENT
  */
-const Home = (props) => {
+const Home = () => {
   const email = useSelector((state) => state.auth.me.email);
 
   return (
-
-<div>
-      <h3> Welcome, {email}</h3>
-      <AllAlbums />    </div>  );
+      <div style={{backgroundColor:"#7E5F1F", textAlign: "center"}}>
+        <h3 style={{color: "#CC6491", fontSize: "40px", marginTop:"0px"}}> Welcome, {email}</h3>
+        <AllAlbums />    
+      </div>  
+  );
 };
 
 // export default Home;

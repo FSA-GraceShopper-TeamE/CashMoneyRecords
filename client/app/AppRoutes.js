@@ -7,10 +7,6 @@ import { me } from "./store";
 import SingleAlbum from "../features/SingleAlbum/SingleAlbum";
 import Cart from "../features/Cart/Cart.js";
 
-/**
- * COMPONENT
- */
-
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
