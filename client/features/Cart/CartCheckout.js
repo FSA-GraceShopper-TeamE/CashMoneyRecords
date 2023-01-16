@@ -12,7 +12,7 @@ import Button from "react-bootstrap/Button";
 
 const Checkout = () => {
 
-A
+
     return (
 
       <Form onChange={this.handleChange} onSubmit={this.handleSubmit}>
