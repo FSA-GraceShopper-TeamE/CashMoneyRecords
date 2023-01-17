@@ -37,26 +37,33 @@ router.post("/", async (req, res, next) => {
 // PUT /api/albums (Update Album)
 router.put("/:id", async (req, res, next) => {
   try {
-    // requires an id in req.body
-    const updates = req.body;
-    const album = await Album.findByPk(updates.id);
-    console.log("UPDATES", updates);
-    if (album === null) {
-      const err = new Error();
-      err.status = 404;
-      throw err;
-    }
-
-    Object.entries(updates).forEach(([key, value]) => {
-      album[key] = value;
-    });
-
-    await album.save();
-
-    res.json(album);
+    const row = await Album.findByPk(req.params.id);
+    const updatedRow = await row.update(req.body);
+    
+    res.send(updatedRow);
+    next();
   } catch (err) {
-    next(err);
+    next (err)
   }
+  //   const updates = req.body;
+  //   const album = await Album.findByPk(updates.id);
+  //   console.log("UPDATES", updates);
+  //   if (album === null) {
+  //     const err = new Error();
+  //     err.status = 404;
+  //     throw err;
+  //   }
+
+  //   Object.entries(updates).forEach(([key, value]) => {
+  //     album[key] = value;
+  //   });
+
+  //   await album.save();
+
+  //   res.json(album);
+  // } catch (err) {
+  //   next(err);
+  // }
 });
 
 // GET /api/albums/:albumId (Get One Album)

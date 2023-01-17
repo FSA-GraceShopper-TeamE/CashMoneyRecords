@@ -6,7 +6,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from 'react-bootstrap/Button';
 import { v4 as uuidv4 } from 'uuid';
 import { addToCart } from "../Cart/cartSlice";
-
+import EditAlbum from "../EditAlbum/EditAlbum.js";
 
 import {
   MDBCard,
@@ -25,7 +25,7 @@ const SingleAlbum = () => {
   const [addedToCart, setAddedToCart] = useState(false)
 
   const album = useSelector(selectSingleAlbum);
-  const { title, artistName, price, quantity, tracks, staffPick, description, image, genre } = album
+  const { title, artistName, price, tracks, description, image, genre } = album
 
   useEffect(() => {
     dispatch(fetchSingleAlbumAsync(id));
@@ -35,18 +35,19 @@ const SingleAlbum = () => {
     e.preventDefault();
     setAddedToCart(true);
     dispatch(addToCart(album))
-
-
   }
 
   return (
         <div className='singleAlbum-container'>
+          <EditAlbum />
             <div className='card-container' >
             <Card className='singleAlbum-card' style={{display:"flex", flexDirection:"column", textAlign:"center"}}>
                 <img variant='top' src={image} style={{textAlign:"center"}}/>
                 <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Title>{artistName}</Card.Title>
+                <Card.Title>${price}</Card.Title>
+                <Card.Title>{genre}</Card.Title>
                 <Card.Text>{description}</Card.Text>
                 <div className='d-grid gap-2'>
                     <Button

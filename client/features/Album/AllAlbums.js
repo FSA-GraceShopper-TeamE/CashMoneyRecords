@@ -21,12 +21,14 @@ const AllAlbums = () => {
   const [option, setOption] = useState("");
 
   const handleClick = () => {
-    let filteredAlbums = dispatch(fetchFilteredAlbums(option))
-    return albums = filteredAlbums
+    if(option === "") {
+      return;
+    }
+    dispatch(fetchFilteredAlbums(option))
   }
 
   const handleReset = () => {
-    window.location.reload(true);
+    dispatch(fetchAlbumsAsync());
   }
 
   useEffect(() => {
