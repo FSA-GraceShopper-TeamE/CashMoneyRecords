@@ -3,12 +3,23 @@ import axios from "axios";
 
 export const fetchAlbumsAsync = createAsyncThunk("allAlbums-fetch", async() => {
   try {
-    const  {data}  = await axios.get('/api/albums');
+    const {data} = await axios.get('/api/albums');
     return data;
   } catch (err) {
     console.log(err);
   }
 });
+
+export const fetchFilteredAlbums = createAsyncThunk("filteredAlbums-fetch", async (option) => {
+  try {
+    const { data } = await axios.get(`/api/albums/filter/${option}`)
+    console.log("this is data:", data)
+    console.log("this is the slice option:", option)
+    return data
+  } catch (err) {
+    return err
+  }
+})
 
 export const albumsSlice = createSlice({
   name: "allAlbums",
@@ -20,6 +31,9 @@ export const albumsSlice = createSlice({
     }),
     builder.addCase(fetchAlbumsAsync.rejected, (state, action) =>{
       state.error = action.error; //returns error when rejected
+    }),
+    builder.addCase(fetchFilteredAlbums.fulfilled, (state, action) => {
+      return action.payload
     })
   },
 });

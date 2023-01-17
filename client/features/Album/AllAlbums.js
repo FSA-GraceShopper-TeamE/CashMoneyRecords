@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 // import axios from "axios";
@@ -10,13 +10,24 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 
-import { fetchAlbumsAsync, selectAlbums } from "./albumsSlice";
+import { fetchAlbumsAsync, fetchFilteredAlbums, selectAlbums } from "./albumsSlice";
 
 const AllAlbums = () => {
   const dispatch = useDispatch();
 
   let rawAlbums = useSelector(selectAlbums);
-  const albums = rawAlbums;
+  let albums = rawAlbums;
+
+  const [option, setOption] = useState("");
+
+  const handleClick = () => {
+    let filteredAlbums = dispatch(fetchFilteredAlbums(option))
+    return albums = filteredAlbums
+  }
+
+  const handleReset = () => {
+    window.location.reload(true);
+  }
 
   useEffect(() => {
     dispatch(fetchAlbumsAsync());
@@ -25,13 +36,16 @@ const AllAlbums = () => {
   return (
     <div className="home">
       <div className="allAlbums-title"></div>
-      <select>
-        <option value="">Choose Here</option> 
-        {albums.map(album => {
-                            return <option key={album.id} value={album.id}>{album.genre}</option>
-                        })}     
+      <select onChange={(e)=> setOption(e.target.value)}>
+        <option value="">Choose Genre</option> 
+        <option value="bluegrass">bluegrass</option> 
+        <option value="country">country</option> 
+        <option value="electronic">electronic</option> 
+        <option value="pop">pop</option> 
+        <option value="rap">rap</option> 
+        <option value="rock">rock</option>    
       </select>
-      <button type="submit">Create</button>
+      <button onClick={handleClick}>Select Genre</button><br></br><button onClick={handleReset}>Display All Albums</button>
       <div className="allAlbums" style={{backgroundColor:"#7E5F1F"}}>
         {albums ? (
           albums.map((album) => (

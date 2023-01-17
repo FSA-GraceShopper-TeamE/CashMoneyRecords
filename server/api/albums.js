@@ -7,12 +7,21 @@ module.exports = router;
 // GET /api/albums (Get All Albums)
 router.get("/", async (req, res, next) => {
   try {
-    const albums = await Album.findAll({});
+    const albums = await Album.findAll();
     res.send(albums);
   } catch (err) {
     next(err);
   }
 });
+
+router.get("/filter/:genre", async (req, res, next) => {
+  try {
+    const albums = await Album.findAll({where:{genre:req.params.genre}})
+    res.send(albums)
+  } catch(err) {
+    next (err)
+  }
+})
 
 // POST /api/albums (Create Album)
 router.post("/", async (req, res, next) => {
