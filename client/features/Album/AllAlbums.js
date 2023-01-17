@@ -15,7 +15,8 @@ import { fetchAlbumsAsync, selectAlbums } from "./albumsSlice";
 const AllAlbums = () => {
   const dispatch = useDispatch();
 
-  const albums = useSelector(selectAlbums);
+  let rawAlbums = useSelector(selectAlbums);
+  const albums = rawAlbums;
 
   useEffect(() => {
     dispatch(fetchAlbumsAsync());
@@ -24,6 +25,13 @@ const AllAlbums = () => {
   return (
     <div className="home">
       <div className="allAlbums-title"></div>
+      <select>
+        <option value="">Choose Here</option> 
+        {albums.reduce(album => {
+                            return <option key={album.id} value={album.id}>{album.genre}</option>
+                        })}     
+      </select>
+      <button type="submit">Create</button>
       <div className="allAlbums" style={{backgroundColor:"#7E5F1F"}}>
         {albums ? (
           albums.map((album) => (
