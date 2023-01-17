@@ -41,7 +41,7 @@ const SingleAlbum = () => {
 
   return (
         <div className='singleAlbum-container'>
-            <div className='card-container'>
+            <div className='card-container' >
             <Card className='singleAlbum-card' style={{display:"flex", flexDirection:"column", textAlign:"center"}}>
                 <img variant='top' src={image} style={{textAlign:"center"}}/>
                 <Card.Body>
