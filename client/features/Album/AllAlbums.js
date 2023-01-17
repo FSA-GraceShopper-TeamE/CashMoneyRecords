@@ -27,7 +27,7 @@ const AllAlbums = () => {
       <div className="allAlbums-title"></div>
       <select>
         <option value="">Choose Here</option> 
-        {albums.reduce(album => {
+        {albums.map(album => {
                             return <option key={album.id} value={album.id}>{album.genre}</option>
                         })}     
       </select>
