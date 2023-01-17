@@ -17,8 +17,8 @@ const Navbar = () => {
   return (
     <div>
       <div style={{display:"flex", flexDirection:"row", backgroundColor:"gray"}}>
-        <img style={{width: 300, height:100, marginRight:"50px"}}src={"https://images.squarespace-cdn.com/content/v1/57f00064d2b8571a3cd0b561/1563233403985-Q7XS92I9XRVYB1QMC6QN/spinning-record.gif"}/>
-        <h1 style={{fontFamily:"fantasy", textAlign:"center", width:"100vw"}}>Cash Money Records</h1>
+        <img style={{width: 300, height:150, marginRight:"50px"}}src={"https://images.squarespace-cdn.com/content/v1/57f00064d2b8571a3cd0b561/1563233403985-Q7XS92I9XRVYB1QMC6QN/spinning-record.gif"}/>
+        <h1 style={{fontFamily:"fantasy", textAlign:"center", width:"100vw", fontSize: 50}}>Cash Money Records</h1>
       </div>
       <nav>
         {isLoggedIn ? (
