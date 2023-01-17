@@ -13,6 +13,7 @@ import {
   Select,
   Center,
 } from "@chakra-ui/react";
+
 import { Link, useParams, useNavigate } from "react-router-dom";
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -30,101 +31,106 @@ const AuthForm = ({ name, displayName }) => {
   const [registerAddress, setRegisterAddress] = useState("");
 
   useEffect(() => {
-    // setRegisterEmail('')
-    // setRegisterPassword('')
-  });
+    setRegisterEmail("");
+    setRegisterPassword("");
+    setRegisterAddress("");
+  }, []);
 
-  const handleSubmit = () => {
-    // evt.preventDefault();
-    const formName = "signup";
+  const handleSubmitSignUp = () => {
+    console.log("NAME--->", name);
+    const formName = name;
     const email = registerEmail;
     const password = registerPassword;
     const address = registerAddress;
     const isAdmin = false;
-
+    console.log("SIGNUP---->", formName, email, password, address, isAdmin);
     dispatch(
       authenticate({ email, password, address, isAdmin, method: formName })
     );
     console.log("dispatch hit");
-    console.log("testing---->", formName, email, password, address, isAdmin);
   };
 
-  // return (
-  //   <Box w='50%' color='black' border='2px'>
-  //     <form onSubmit={handleSubmit} name={name}>
-  //       <div>
-  //         <label htmlFor="email">
-  //           <small>Email</small>
-  //         </label>
-  //         <input name="email" type="text" />
-  //       </div>
-  //       <div>
-  //         <label htmlFor="password">
-  //           <small>Password</small>
-  //         </label>
-  //         <input name="password" type="password" />
-  //       </div>
-  //       <div>
-  //         <button type="submit">{displayName}</button>
-  //       </div>
-  //       {/* {error && <div> {error} </div>} */}
-  //     </form>
-  //   </Box>
-  // );
+  const handleSubmitLogin = () => {
+    console.log("NAME--->", name);
+    const formName = name;
+    const email = registerEmail;
+    const password = registerPassword;
+    console.log("LOGIN---->", formName, email, password);
+    dispatch(authenticate({ email, password, method: formName }));
+    console.log("dispatch hit");
+  };
 
-  return (
-    <Center>
-      <Box
-        display="grid"
-        w="75%"
-        color="grey"
-        // border="1px"
-        // borderRadius="25px"
-        // borderWidth="5px"
-        // alignItems="right"
-        // alignContent="right"
-        // justifyContent="right"
-      >
-        <Center>
-          <Box
-            // display="grid"
-            w="50%"
-            // alignItems="center"
-            // alignContent="center"
-            // justifyContent="center"
-          >
-            {/* <Wrap spacing='5px' justify='center'> */}
-            <Input
-              size="md"
-              name="email"
-              type="text"
-              placeholder="Enter Email"
-              onChange={(e) => setRegisterEmail(e.target.value)}
-            />
-            <Input
-              size="md"
-              name="address"
-              type="text"
-              placeholder="Enter Address"
-              onChange={(e) => setRegisterAddress(e.target.value)}
-            />
-            <Input
-              size="md"
-              name="password"
-              type="password"
-              placeholder="Enter Password"
-              onChange={(e) => setRegisterPassword(e.target.value)}
-            />
+  const switchTabs = () => {
+    console.log("hello");
+    navigate(0);
+  };
 
-            <Button colorScheme="teal" size="md" onClick={handleSubmit}>
-              Register
-            </Button>
-            {/* </Wrap> */}
-          </Box>
-        </Center>
-      </Box>
-    </Center>
-  );
+  if (name === "signup") {
+    return (
+      <Center>
+        <Box display="grid" w="75%" color="grey">
+          <Center>
+            <Box w="50%">
+              <Input
+                size="md"
+                name="email"
+                type="text"
+                placeholder="Enter Email"
+                onChange={(e) => setRegisterEmail(e.target.value)}
+              />
+              <Input
+                size="md"
+                name="address"
+                type="text"
+                placeholder="Enter Address"
+                onChange={(e) => setRegisterAddress(e.target.value)}
+              />
+              <Input
+                size="md"
+                name="password"
+                type="password"
+                placeholder="Enter Password"
+                onChange={(e) => setRegisterPassword(e.target.value)}
+              />
+
+              <Button colorScheme="teal" size="md" onClick={handleSubmitSignUp}>
+                Register
+              </Button>
+            </Box>
+          </Center>
+        </Box>
+      </Center>
+    );
+  }
+  if (name === "login") {
+    return (
+      <Center>
+        <Box display="grid" w="75%" color="grey">
+          <Center>
+            <Box w="50%">
+              <Input
+                size="md"
+                name="email"
+                type="text"
+                placeholder="Enter Email"
+                onChange={(e) => setRegisterEmail(e.target.value)}
+              />
+              <Input
+                size="md"
+                name="password"
+                type="password"
+                placeholder="Enter Password"
+                onChange={(e) => setRegisterPassword(e.target.value)}
+              />
+
+              <Button colorScheme="teal" size="md" onClick={handleSubmitLogin}>
+                Login
+              </Button>
+            </Box>
+          </Center>
+        </Box>
+      </Center>
+    );
+  }
 };
-
 export default AuthForm;
