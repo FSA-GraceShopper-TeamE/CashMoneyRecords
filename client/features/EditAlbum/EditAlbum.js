@@ -25,8 +25,9 @@ const EditAlbum = () => {
 
   return (
     <div>
-      <h1>UPDATE ALBUM</h1>
+      <h1 style={{fontSize:50, fontWeight:"bolder"}}>UPDATE ALBUM</h1>
       <form method="post" action={`/albums/${id}`} onSubmit={handleSubmit}>
+        <label>Price</label>
         <input
           required
           style={{ width: 350, border: "2px solid black" }}
@@ -35,6 +36,7 @@ const EditAlbum = () => {
           onChange={(e) => setNewPrice(e.target.value)}
         ></input>
         <br></br>
+        <label>Quantity</label>
         <input
           required
           style={{ width: 350, border: "2px solid black" }}
@@ -43,6 +45,7 @@ const EditAlbum = () => {
           onChange={(e) => setNewQuantity(e.target.value)}
         ></input>
         <br></br>
+        <label>Genre</label>
         <input
           required
           style={{ width: 350, border: "2px solid black" }}
@@ -51,7 +54,7 @@ const EditAlbum = () => {
           onChange={(e) => setNewGenre(e.target.value)}
         ></input>
         <br></br>
-        <button type="submit" onClick={handleClick}>
+        <button style={{border:"2px solid black", backgroundColor:"grey", padding:5, marginTop:10}} type="submit" onClick={handleClick}>
           Update
         </button>
       </form>

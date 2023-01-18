@@ -32,7 +32,7 @@ const Navbar = () => {
             fontFamily: "fantasy",
             textAlign: "center",
             width: "100vw",
-            fontSize: 50,
+            fontSize: 100
           }}
         >
           Cash Money Records

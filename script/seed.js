@@ -1,54 +1,55 @@
-"use strict";
+const axios = require("axios");
+const { faker } = require("@faker-js/faker");
 
 const {
   db,
   models: { Album, Order, OrderAlbum, User },
 } = require("../server/db");
 
-const axios = require("axios");
-const { faker } = require("@faker-js/faker");
-
-const USER_ID = "acb7e91a80d7d2f58de1b5f8f149cdac";
-const CONFIG = {
+const userID = "c2c9e5f29cc4a9299ea289ee2d0ef9b2";
+const configure = {
   headers: {
-    ["User-Agent"]: "grace-shopper/1.0",
+    ["User-Agent"]: "grace-shopper/2023",
     ["Content-Type"]: "application/x-www-form-urlencoded",
   },
 };
-const NUM_ARTISTS = 20;
-const ALBUMS_PER_ARTIST = 5;
-const NUM_USERS = 30;
+const artists = 40;
+const albums = 5;
+const users = 30;
 
-const prices = [9.99, 19.99, 15.99, 12.84];
-const genres = ["pop", "rap", "rock", "electronic", "country", "bluegrass"];
+const albumPrices = [10.55, 14.99, 16.25, 18.33, 20.99, 25.75];
+const albumGenres = [
+  "Jazz",
+  "Techno",
+  "Reggae",
+  "Alternative",
+  "Instrumental",
+  "Hip Hop",
+];
 
 async function seed() {
   await db.sync({ force: true });
-  console.log("db synced... (may take a minute)");
+  console.log("db in process of syncing");
 
-  // get top 20 artists
-  const topArtistsURL = `http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=${USER_ID}&format=json`;
-  const artistData = await axios.get(topArtistsURL, CONFIG);
+  const topArtistsURL = `http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=${userID}&format=json`;
+  const artistData = await axios.get(topArtistsURL, configure);
 
-  // map the top 20 artist to an array of just their names
-  const top20Artists = artistData.data.artists.artist
-    .slice(0, NUM_ARTISTS)
+  const top40Artists = artistData.data.artists.artist
+    .slice(0, artists)
     .map((artist) => artist.name);
 
-  for (const artist of top20Artists) {
-    // get top albums for top artists
-    const artistAlbumsURL = `http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${artist}&api_key=${USER_ID}&format=json`;
-    const artistAlbumsData = await axios.get(artistAlbumsURL, CONFIG);
+  for (const artist of top40Artists) {
+    const artistAlbumsURL = `http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${artist}&api_key=${userID}&format=json`;
+    const artistAlbumsData = await axios.get(artistAlbumsURL, configure);
 
-    // map the top 5 albums to an array of just the album titles
     const top5Albums = artistAlbumsData.data.topalbums.album
-      .splice(0, ALBUMS_PER_ARTIST)
+      .splice(0, albums)
       .map((album) => album.name);
 
     for (const albumTitle of top5Albums) {
-      // get specific album info for each album
-      const albumURL = `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${USER_ID}&artist=${artist}&album=${albumTitle}&format=json`;
-      const { data } = await axios.get(albumURL, CONFIG);
+     
+      const albumURL = `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${userID}&artist=${artist}&album=${albumTitle}&format=json`;
+      const { data } = await axios.get(albumURL, configure);
       const { album } = data;
 
       const tracksData =
@@ -57,20 +58,16 @@ async function seed() {
       const tags = album.tags && album.tags.tag.length > 2 ? album.tags.tag : 0;
 
       if (album && tracksData && tags && album.wiki) {
-        // normalize data for album
+        
         const artistName = album.artist;
         const title = album.name;
         const tracks = tracksData.map((track) => track.name);
-
         const description = album.wiki.summary;
         const image = album.image[3]["#text"];
-        const genre = genres[Math.floor(Math.random() * 6)];
-
-        // create extra data as needed
-        const price = prices[Math.floor(Math.random() * 4)];
+        const genre = albumGenres[Math.floor(Math.random() * 6)];
+        const price = albumPrices[Math.floor(Math.random() * 6)];
         const quantity = Math.floor(Math.random() * 50);
-        const staffPick = false;
-        // create album!
+        
         await Album.create({
           artistName,
           title,
@@ -80,13 +77,12 @@ async function seed() {
           genre,
           price,
           quantity,
-          staffPick,
         });
       }
     }
   }
   // Creating Users
-  for (let i = 0; i < NUM_USERS; i += 1) {
+  for (let i = 0; i < users; i += 1) {
     const user = {};
     user.email = faker.internet.email();
     user.password = faker.lorem.word(12);
@@ -101,7 +97,7 @@ async function seed() {
   }
   // Create Admin User
   const admin = {};
-  admin.email = "admin@hotmail.com";
+  admin.email = "admin@gmail.com";
   admin.password = "password";
   admin.address =
     faker.address.streetAddress() +
@@ -134,35 +130,35 @@ async function seed() {
   // Order Items
   for (let i = 0; i < 100; i++) {
     const orderAlbums = {};
-    orderAlbums.price = prices[Math.floor(Math.random() * 4)];
+    orderAlbums.price = albumPrices[Math.floor(Math.random() * 6)];
     orderAlbums.quantity = Math.ceil(Math.random() * 3);
     orderAlbums.albumId = Math.ceil(Math.random() * 30);
-    orderAlbums.orderId = Math.ceil(Math.random() * NUM_USERS);
+    orderAlbums.orderId = Math.ceil(Math.random() * users);
     await OrderAlbum.create(orderAlbums);
   }
 
   for (let i = 0; i < 5; i += 1) {
     const orderAlbums = {};
-    orderAlbums.price = prices[Math.floor(Math.random() * 4)];
+    orderAlbums.price = albumPrices[Math.floor(Math.random() * 6)];
     orderAlbums.quantity = Math.ceil(Math.random() * 3);
     orderAlbums.albumId = Math.ceil(Math.random() * 30);
     orderAlbums.orderId = 31;
     await OrderAlbum.create(orderAlbums);
   }
-  console.log(`seeded grace-shopper successfully!!!`);
+  console.log(`db seeded successfully!`);
 }
 
 async function runSeed() {
-  console.log("seeding...");
+  console.log("seeding");
   try {
     await seed();
   } catch (err) {
     console.error(err);
     process.exitCode = 1;
   } finally {
-    console.log("closing db connection...");
+    console.log("closing db connection");
     await db.close();
-    console.log("db connection closed");
+    console.log("db connection has been closed");
   }
 }
 

@@ -40,18 +40,18 @@ const AllAlbums = () => {
   return (
     <div className="home">
       <div className="allAlbums-title"></div>
-      <select onChange={(e) => setOption(e.target.value)}>
+      <select onChange={(e) => setOption(e.target.value)} style={{border:"2px solid black", backgroundColor:"lightGrey", padding:5, marginTop:1}}>
         <option value="">Choose Genre</option>
-        <option value="bluegrass">Bluegrass</option>
-        <option value="country">Country</option>
-        <option value="electronic">Electronic</option>
-        <option value="pop">Pop</option>
-        <option value="rap">Rap</option>
-        <option value="rock">Rock</option>
+        <option value="Jazz">Jazz</option>
+        <option value="Techno">Techno</option>
+        <option value="Hip Hop">Hip Hop</option>
+        <option value="Instrumental">Instrumental</option>
+        <option value="Alternative">Alternative</option>
+        <option value="Reggae">Reggae</option>
       </select>
-      <button onClick={handleClick}>Select Genre</button>
+      <button style={{border:"2px solid black", backgroundColor:"lightGrey", padding:5, margin:10, marginBottom:2}} onClick={handleClick}>Select Genre</button>
       <br></br>
-      <button onClick={handleReset}>All Albums</button>
+      <button style={{border:"2px solid black", backgroundColor:"lightGrey", padding:5, margin:10}} onClick={handleReset}>All Albums</button>
       <div className="allAlbums">
         {albums ? (
           albums.map((album) => (

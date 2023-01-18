@@ -175,6 +175,7 @@ img {
   background-Color: #CEA27E;
   font-family: Roboto Slab, serif;
   border: 5px solid black;
+  border-radius: 15px;
   margin: 5px;
 }
 

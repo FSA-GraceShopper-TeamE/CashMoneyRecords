@@ -17,6 +17,7 @@ import {
 } from "mdb-react-ui-kit";
 
 import { fetchSingleAlbumAsync, selectSingleAlbum } from "./singleAlbumSlice";
+import { green } from "@mui/material/colors";
 
 const SingleAlbum = () => {
   const { id } = useParams();
@@ -49,25 +50,26 @@ const SingleAlbum = () => {
             textAlign: "center",
           }}
         >
-          <img variant="top" src={image} style={{ textAlign: "center" }} />
+          <img variant="top" src={image} style={{ alignSelf: "center", width:500, height: 500 }} />
           <Card.Body>
-            <Card.Title>{title}</Card.Title>
-            <Card.Title>{artistName}</Card.Title>
-            <Card.Title>${price}</Card.Title>
-            <Card.Title>{genre}</Card.Title>
+            <Card.Title style={{fontSize:50, fontStyle:"italic"}}>{title}</Card.Title>
+            <Card.Title style={{fontSize:50, fontWeight:"bolder"}}>{artistName}</Card.Title>
+            <Card.Title style={{fontSize: 30, color: "green", fontWeight:"bold"}}>${price}</Card.Title>
+            <Card.Title style={{fontSize: 20, fontStyle:"italic"}}>{genre}</Card.Title>
             <Card.Text>{description}</Card.Text>
             <div className="d-grid gap-2">
               <Button
+                style={{border:"2px solid black", backgroundColor:"grey", padding:5}}
                 type="submit"
                 variant={addedToCart ? "success" : "info"}
                 onClick={handleClick}
               >
-                {addedToCart ? "Item Added" : "Add To Cart"}
+                {addedToCart ? "Item Added To Cart" : "Add To Cart"}
               </Button>{" "}
             </div>
           </Card.Body>
 
-          <ListGroup className="list-group-flush">
+          <ListGroup>
             {tracks ? (
               tracks.map((track, i) => (
                 <ListGroup.Item key={uuidv4()}>
