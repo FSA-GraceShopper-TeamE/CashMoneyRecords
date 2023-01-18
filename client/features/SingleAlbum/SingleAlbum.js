@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import Button from 'react-bootstrap/Button';
-import { v4 as uuidv4 } from 'uuid';
+import Button from "react-bootstrap/Button";
+import { v4 as uuidv4 } from "uuid";
 import { addToCart } from "../Cart/cartSlice";
 import EditAlbum from "../EditAlbum/EditAlbum.js";
 
@@ -19,13 +19,13 @@ import {
 import { fetchSingleAlbumAsync, selectSingleAlbum } from "./singleAlbumSlice";
 
 const SingleAlbum = () => {
-  const { id } = useParams()
+  const { id } = useParams();
   const dispatch = useDispatch();
 
-  const [addedToCart, setAddedToCart] = useState(false)
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const album = useSelector(selectSingleAlbum);
-  const { title, artistName, price, tracks, description, image, genre } = album
+  const { title, artistName, price, tracks, description, image, genre } = album;
 
   useEffect(() => {
     dispatch(fetchSingleAlbumAsync(id));
@@ -34,48 +34,53 @@ const SingleAlbum = () => {
   const handleClick = (e) => {
     e.preventDefault();
     setAddedToCart(true);
-    dispatch(addToCart(album))
-  }
+    dispatch(addToCart(album));
+  };
 
   return (
-        <div className='singleAlbum-container'>
-          <EditAlbum />
-            <div className='card-container' >
-            <Card className='singleAlbum-card' style={{display:"flex", flexDirection:"column", textAlign:"center"}}>
-                <img variant='top' src={image} style={{textAlign:"center"}}/>
-                <Card.Body>
-                <Card.Title>{title}</Card.Title>
-                <Card.Title>{artistName}</Card.Title>
-                <Card.Title>${price}</Card.Title>
-                <Card.Title>{genre}</Card.Title>
-                <Card.Text>{description}</Card.Text>
-                <div className='d-grid gap-2'>
-                    <Button
-                    type='submit'
-                    variant={addedToCart ? 'success' : 'info'}
-                    onClick={handleClick}
-                    >
-                    {addedToCart ? 'Item Added' : 'Add To Cart'}
-                    </Button>{' '}
-                </div>
-                {/* <Card.Link href="/cart">add to cart</Card.Link> */}
-                </Card.Body>
-
-                <ListGroup className='list-group-flush'>
-                {tracks ? (
-                tracks.map((track, i) => (
-                  <ListGroup.Item key={uuidv4()}>
-                    {i + 1}.  {track}
-                    </ListGroup.Item>
-                ))) : (
-                    <div></div>
-                )}
-                </ListGroup>
-            </Card>
+    <div className="singleAlbum-container">
+      <EditAlbum />
+      <div className="card-container">
+        <Card
+          className="singleAlbum-card"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            textAlign: "center",
+          }}
+        >
+          <img variant="top" src={image} style={{ textAlign: "center" }} />
+          <Card.Body>
+            <Card.Title>{title}</Card.Title>
+            <Card.Title>{artistName}</Card.Title>
+            <Card.Title>${price}</Card.Title>
+            <Card.Title>{genre}</Card.Title>
+            <Card.Text>{description}</Card.Text>
+            <div className="d-grid gap-2">
+              <Button
+                type="submit"
+                variant={addedToCart ? "success" : "info"}
+                onClick={handleClick}
+              >
+                {addedToCart ? "Item Added" : "Add To Cart"}
+              </Button>{" "}
             </div>
-        </div>
-  )
-}
-  ;
+          </Card.Body>
 
+          <ListGroup className="list-group-flush">
+            {tracks ? (
+              tracks.map((track, i) => (
+                <ListGroup.Item key={uuidv4()}>
+                  {i + 1}. {track}
+                </ListGroup.Item>
+              ))
+            ) : (
+              <div></div>
+            )}
+          </ListGroup>
+        </Card>
+      </div>
+    </div>
+  );
+};
 export default SingleAlbum;

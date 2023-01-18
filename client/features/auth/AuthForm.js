@@ -15,11 +15,6 @@ import {
 } from "@chakra-ui/react";
 
 import { Link, useParams, useNavigate } from "react-router-dom";
-/**
-  The AuthForm component can be used for Login or Sign Up.
-  Props for Login: name="login", displayName="Login"
-  Props for Sign up: name="signup", displayName="Sign Up"
-**/
 
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);

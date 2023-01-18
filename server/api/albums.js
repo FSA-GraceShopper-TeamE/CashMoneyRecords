@@ -45,25 +45,6 @@ router.put("/:id", async (req, res, next) => {
   } catch (err) {
     next (err)
   }
-  //   const updates = req.body;
-  //   const album = await Album.findByPk(updates.id);
-  //   console.log("UPDATES", updates);
-  //   if (album === null) {
-  //     const err = new Error();
-  //     err.status = 404;
-  //     throw err;
-  //   }
-
-  //   Object.entries(updates).forEach(([key, value]) => {
-  //     album[key] = value;
-  //   });
-
-  //   await album.save();
-
-  //   res.json(album);
-  // } catch (err) {
-  //   next(err);
-  // }
 });
 
 // GET /api/albums/:albumId (Get One Album)

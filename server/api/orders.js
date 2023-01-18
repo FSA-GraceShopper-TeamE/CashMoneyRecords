@@ -1,7 +1,7 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const {
   models: { Order, Album, OrderAlbum, User },
-} = require('../db');
+} = require("../db");
 module.exports = router;
 
 const requireToken = async (req, res, next) => {
@@ -16,7 +16,7 @@ const requireToken = async (req, res, next) => {
 };
 
 // GET /api/orders (Get All Orders)
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const orders = await Order.findAll({});
     res.send(orders);
@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // POST /api/orders (Create New Order)
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const orderInfo = req.body;
   try {
     // requires userId in req.body at minimum
@@ -39,10 +39,7 @@ router.post('/', async (req, res, next) => {
 });
 
 // PUT /api/orders/ (Edit Single Order)
-// This route should not be used to update the items in an order,
-// only its other attributes.
-// To update the items, use the /api/orderAlbums routes
-router.put('/', async (req, res, next) => {
+router.put("/", async (req, res, next) => {
   try {
     // requires id (of order) in req.body
     const updates = req.body;
@@ -68,10 +65,10 @@ router.put('/', async (req, res, next) => {
 });
 
 // GET /api/orders/cart (Get Cart)
-router.get('/cart', requireToken, async (req, res, next) => {
+router.get("/cart", requireToken, async (req, res, next) => {
   try {
     const [cart] = await Order.findAll({
-      attributes: ['id', 'billingInfo', 'shippingInfo', 'completed'],
+      attributes: ["id", "billingInfo", "shippingInfo", "completed"],
       where: {
         userId: req.user.id,
         completed: false,
@@ -81,13 +78,13 @@ router.get('/cart', requireToken, async (req, res, next) => {
     if (!cart) res.status(404).send({});
 
     const items = await OrderAlbum.findAll({
-      attributes: ['id', 'price', 'quantity'],
+      attributes: ["id", "price", "quantity"],
       where: {
         orderId: cart.id,
       },
       include: {
         model: Album,
-        attributes: ['id', 'price', 'title', 'artistName', 'image'],
+        attributes: ["id", "price", "title", "artistName", "image"],
       },
     });
 
@@ -98,7 +95,7 @@ router.get('/cart', requireToken, async (req, res, next) => {
 });
 
 // GET /api/orders/:orderId (Get Single Order)
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const order = await Order.findByPk(id);
@@ -115,7 +112,7 @@ router.get('/:id', async (req, res, next) => {
       },
       include: [Album],
     });
-    console.log('order from get order api..... ', order);
+    console.log("order from get order api..... ", order);
     res.json({ ...order.dataValues, items });
   } catch (err) {
     next(err);
@@ -123,7 +120,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // DELETE /api/orders/:orderId (Delete Single Order)
-router.delete('/:id', async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const order = await Order.findByPk(id);
@@ -152,7 +149,7 @@ router.delete('/:id', async (req, res, next) => {
 });
 
 // POST /api/orders/guest (Create New Order for Guest Checkout)
-router.post('/guest', async (req, res, next) => {
+router.post("/guest", async (req, res, next) => {
   try {
     const { items, shippingInfo, billingInfo } = req.body;
     const order = await Order.create({
@@ -164,7 +161,7 @@ router.post('/guest', async (req, res, next) => {
     const { id } = order;
 
     const orderItems = await Promise.all(
-      items.map(async item => {
+      items.map(async (item) => {
         const { price, quantity, album } = item;
         return await OrderAlbum.create({
           price,
