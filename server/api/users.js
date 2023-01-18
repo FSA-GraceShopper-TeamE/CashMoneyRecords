@@ -44,6 +44,7 @@ router.put("/", requireToken, async (req, res, next) => {
   try {
     // requires id (of user) in req.body
     const updates = req.body;
+    console.log('this is backend',updates)
     const user = await User.findByPk(updates.id);
 
     if (user === null) {

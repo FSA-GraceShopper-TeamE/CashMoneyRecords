@@ -1,15 +1,20 @@
 import React,{useEffect, useState} from 'react'
 import { useDispatch} from 'react-redux'
-import { editSingleUser, singleUserEdit } from './editUserProfile'
+import { editSingleUser, singleUserEdit } from '../auth/authSlice'
 import { Link,useNavigate, useParams} from 'react-router-dom'
 import { me } from '../auth/authSlice'
+
+const TOKEN = "token";
 const UserProfile = () => {
 
+  
+  // const token = window.localStorage.getItem(TOKEN);
   const [email, setNewEmail] = useState('');
   const [address, setNewAddress] = useState('');
   
-  const {id} = useParams();
-
+  // const {id} = me;
+  let id = localStorage.getItem(TOKEN);
+  console.log('this is useParams for now', TOKEN)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

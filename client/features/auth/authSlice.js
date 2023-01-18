@@ -18,6 +18,7 @@ export const me = createAsyncThunk("auth/me", async () => {
           authorization: token,
         },
       });
+      console.log('this is me Thunk',res.data)
       return res.data;
     } else {
       return {};
@@ -33,9 +34,11 @@ export const me = createAsyncThunk("auth/me", async () => {
 
 export const authenticate = createAsyncThunk(
   "auth/authenticate",
-  async ({ email, password, address, isAdmin, method }, thunkAPI) => {
+  async ({ id,email, password, address, isAdmin, method }, thunkAPI) => {
+    console.log('thunk method', method)
     try {
       const res = await axios.post(`/auth/${method}`, {
+        id,
         email,
         password,
         address,
@@ -54,7 +57,18 @@ export const authenticate = createAsyncThunk(
   }
 );
 
+export const editSingleUser = createAsyncThunk('user/edit',async(edit, thunkAPI)=>{
+  try {
+      const { id, email, address} = edit
+      const editingTo = { email, address }
 
+      const {data} = await axios.put(`/auth/${id}`, editingTo)
+      console.log('this is the thunk', data)
+      return data;
+  } catch (err) {
+      console.log(err);
+  }
+});
 /*
   SLICE
 */
