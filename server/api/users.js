@@ -87,12 +87,22 @@ router.delete("/:id", requireToken, async (req, res, next) => {
 router.get("/:id", requireToken, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
+    console.log('this is Backend', user)
     res.send(user);
   } catch (err) {
     next(err);
   }
 });
-
+// GET /api/users/:userId (Get One User and update)
+// router.put("/:id", requireToken, async (req, res, next) => {
+//   try {
+//     const updateUser = await User.findByToken(req.headers.authorization);
+//     // console.log('this is Backend', user)
+//     res.send(updateUser);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 // GET /api/users/:userId/cart (Get Cart)
 router.get("/:id/cart", requireToken, async (req, res, next) => {
   try {

@@ -29,6 +29,7 @@ const Navbar = () => {
               Logout
             </button>
             <Link to="/cart">Cart</Link>
+            <Link to='/userProfile'>UserProfile</Link>
           </div>
         ) : (
           <div>
