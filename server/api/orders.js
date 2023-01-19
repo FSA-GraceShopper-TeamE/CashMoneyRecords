@@ -15,7 +15,6 @@ const requireToken = async (req, res, next) => {
   }
 };
 
-// GET /api/orders (Get All Orders)
 router.get("/", async (req, res, next) => {
   try {
     const orders = await Order.findAll({});
@@ -25,12 +24,9 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// POST /api/orders (Create New Order)
 router.post("/", async (req, res, next) => {
   const orderInfo = req.body;
   try {
-    // requires userId in req.body at minimum
-    // should include shippingInfo, billingInfo, and completed
     const order = await Order.create(orderInfo);
     res.json(order);
   } catch (err) {
@@ -38,12 +34,9 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// PUT /api/orders/ (Edit Single Order)
 router.put("/", async (req, res, next) => {
   try {
-    // requires id (of order) in req.body
     const updates = req.body;
-
     const order = await Order.findByPk(updates.id);
 
     if (order === null) {
@@ -51,7 +44,7 @@ router.put("/", async (req, res, next) => {
       err.status = 404;
       throw err;
     }
-    // apply updates to order
+    
     Object.entries(updates).forEach(([key, value]) => {
       order[key] = value;
     });
@@ -64,7 +57,6 @@ router.put("/", async (req, res, next) => {
   }
 });
 
-// GET /api/orders/cart (Get Cart)
 router.get("/cart", requireToken, async (req, res, next) => {
   try {
     const [cart] = await Order.findAll({

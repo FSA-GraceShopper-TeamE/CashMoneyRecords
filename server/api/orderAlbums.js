@@ -5,7 +5,6 @@ const {
 const Order = require("../db/models/Order");
 module.exports = router;
 
-// PUT /api/orderAlbums (Edit Item From Order)
 router.put("/", async (req, res, next) => {
   try {
     const updates = req.body;
@@ -29,7 +28,6 @@ router.put("/", async (req, res, next) => {
   }
 });
 
-// POST /api/orderAlbums (Add Item To Order)
 router.post("/", async (req, res, next) => {
   try {
     const item = req.body;
@@ -40,7 +38,6 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// DELETE /api/orderAlbums/:orderAlbumId (Delete Item From Order)
 router.delete("/:id", async (req, res, next) => {
   try {
     const id = +req.params.id;
