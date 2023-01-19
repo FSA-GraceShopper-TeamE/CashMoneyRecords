@@ -28,9 +28,10 @@ const AppRoutes = () => {
         </Routes>
       ) : (
         <Routes>
+          <Route path="/*" element={<Home />} />
           <Route path="/home" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="checkout" element={<Checkout />} />
+            {/* <Route path="checkout" element={<Checkout />} /> */}
           <Route path="/albums/:id" element={<SingleAlbum />} />
           <Route
             path="/login"

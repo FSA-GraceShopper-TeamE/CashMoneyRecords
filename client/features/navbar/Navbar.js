@@ -32,7 +32,7 @@ const Navbar = () => {
             fontFamily: "fantasy",
             textAlign: "center",
             width: "100vw",
-            fontSize: 100
+            fontSize: 100,
           }}
         >
           Cash Money Records
@@ -49,6 +49,7 @@ const Navbar = () => {
           </div>
         ) : (
           <div>
+            <Link to="/home">Home</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/cart">Cart</Link>
