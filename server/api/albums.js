@@ -39,6 +39,7 @@ router.put("/:id", async (req, res, next) => {
   try {
     const row = await Album.findByPk(req.params.id);
     const updatedRow = await row.update(req.body);
+    
     res.send(updatedRow);
     next();
   } catch (err) {

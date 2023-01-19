@@ -3,9 +3,9 @@ import { useDispatch, useSelector} from 'react-redux'
 // import { editSingleUser, singleUserEdit } from '../auth/authSlice'
 import { Link,useNavigate, useParams} from 'react-router-dom'
 import { me } from '../auth/authSlice'
-import { fetchUserProfile, singleUserEdit } from './editUserProfile'
+import { fetchUserProfile, editSingleUser } from './editUserProfile'
 
-const TOKEN = "token";
+// const TOKEN = "token";
 const UserProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,9 +30,9 @@ const UserProfile = () => {
     e.preventDefault();
     // const userUpdate = { id, email, address }
     // console.log('this is handle Submit', userUpdate);
-    dispatch(editSingleUser({id: userId, email, address})).then(()=>{
-      navigate('/')
-    })
+    dispatch(editSingleUser({id: userId, email, address}))
+    navigate('/')
+
   }
   
   return (
