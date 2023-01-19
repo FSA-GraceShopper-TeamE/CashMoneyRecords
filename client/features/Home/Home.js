@@ -10,7 +10,7 @@ const Home = () => {
     <div style={{ backgroundColor: "#7E5F1F", textAlign: "center" }}>
       <h3 style={{ color: "#CC6491", fontSize: "40px", marginTop: "0px", fontWeight:"bolder"}}>
         {" "}
-        Welcome, {email}
+        Welcome {email}
       </h3>
       <AllAlbums />
     </div>
