@@ -57,18 +57,19 @@ export const authenticate = createAsyncThunk(
   }
 );
 
-export const editSingleUser = createAsyncThunk('user/edit',async(edit, thunkAPI)=>{
-  try {
-      const { id, email, address} = edit
-      const editingTo = { email, address }
+// export const editSingleUser = createAsyncThunk('user/edit',async(edit, thunkAPI)=>{
+//   try {
+//       const { id, email, address} = edit
+//       const editingTo = { email, address }
 
-      const {data} = await axios.put(`/auth/${id}`, editingTo)
-      console.log('this is the thunk', data)
-      return data;
-  } catch (err) {
-      console.log(err);
-  }
-});
+//       const {data} = await axios.put(`/auth/${id}`, editingTo)
+//       console.log('this is the thunk', data)
+//       return data;
+//   } catch (err) {
+//       console.log(err);
+//   }
+// });
+
 /*
   SLICE
 */

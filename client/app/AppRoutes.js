@@ -6,7 +6,7 @@ import Home from "../features/Home/Home";
 import { me } from "./store";
 import SingleAlbum from "../features/SingleAlbum/SingleAlbum";
 import Cart from "../features/Cart/Cart.js";
-import UserProfile from "../features/user.js/userProfile";
+import UserProfile from "../features/user/userProfile";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -22,7 +22,7 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/userProfile" element={<UserProfile />} />
+          <Route path="/userProfile/:id" element={<UserProfile />} />
           <Route path="/albums/:id" element={<SingleAlbum />} />
           <Route path="/*" element={<Home />} />
         </Routes>

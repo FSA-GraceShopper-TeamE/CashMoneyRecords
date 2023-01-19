@@ -5,6 +5,7 @@ import albumsReducer from "../features/Album/albumsSlice";
 import singleAlbumReducer from "../features/singleAlbum/singleAlbumSlice";
 import cartReducer from '../features/Cart/cartSlice'
 import storage from "redux-persist/lib/storage";
+import editSingleReducer from '../features/user/editUserProfile'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from "redux-persist";
 
 const persistConfig = {
@@ -20,6 +21,7 @@ const store = configureStore({
     auth: authReducer,
     albums: albumsReducer,
     singleAlbum: singleAlbumReducer,
+    editUser: editSingleReducer
     // cartXXX: cartReducer,
   },
   middleware: (getDefaultMiddleware) =>

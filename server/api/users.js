@@ -85,9 +85,12 @@ router.delete("/:id", requireToken, async (req, res, next) => {
 });
 
 // GET /api/users/:userId (Get One User)
-router.get("/:id", requireToken, async (req, res, next) => {
+router.get("/:id",requireToken, async (req, res, next) => {
   try {
-    const user = await User.findByToken(req.headers.authorization);
+    // const user = await User.findByToken(req.headers.authorization);
+    console.log(req.params)
+    console.log(requireToken)
+    const user = await User.findByPk(req.params.id)
     console.log('this is Backend', user)
     res.send(user);
   } catch (err) {

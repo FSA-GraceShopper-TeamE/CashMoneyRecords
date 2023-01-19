@@ -1,45 +1,45 @@
 import React,{useEffect, useState} from 'react'
-import { useDispatch} from 'react-redux'
-import { editSingleUser, singleUserEdit } from '../auth/authSlice'
+import { useDispatch, useSelector} from 'react-redux'
+// import { editSingleUser, singleUserEdit } from '../auth/authSlice'
 import { Link,useNavigate, useParams} from 'react-router-dom'
 import { me } from '../auth/authSlice'
+import { fetchUserProfile, singleUserEdit } from './editUserProfile'
 
 const TOKEN = "token";
 const UserProfile = () => {
-
-  
-  // const token = window.localStorage.getItem(TOKEN);
-  const [email, setNewEmail] = useState('');
-  const [address, setNewAddress] = useState('');
-  
-  // const {id} = me;
-  let id = localStorage.getItem(TOKEN);
-  console.log('this is useParams for now', TOKEN)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
+  const userId = useSelector((state) => state.auth.me.id)
+
+  const [email, setNewEmail] = useState('');
+  const [address, setNewAddress] = useState('');
+
+  useEffect(()=>{
+    // dispatch(me(id)).then((res)=>{
+    //   const {email, address} = res.payload;
+    //   setNewEmail(email);
+    //   setNewAddress(address);
+    // })
+    dispatch(fetchUserProfile(userId))
+  }, [dispatch, userId]);
+
+
   const handleSubmit = (e) =>{
     e.preventDefault();
-    const userUpdate = { id, email, address }
-    console.log('this is handle Submit', userUpdate);
-    dispatch(editSingleUser(userUpdate)).then(()=>{
+    // const userUpdate = { id, email, address }
+    // console.log('this is handle Submit', userUpdate);
+    dispatch(editSingleUser({id: userId, email, address})).then(()=>{
       navigate('/')
     })
   }
-
-  // useEffect(()=>{
-  //   dispatch(me(id)).then((res)=>{
-  //     const {email, address} = res.payload;
-  //     setNewEmail(email);
-  //     setNewAddress(address);
-  //   })
-  // })
   
   return (
     <div>
       <h1>UserProfile</h1>
         <div>
-        <form method='put' action={`/users/${id}`} onSubmit={handleSubmit}>
+        <form id='editUder' onSubmit={handleSubmit}>
           <label htmlFor="email">Email:</label>
           <input
             required style={{width:350, border:"2px solid black"}}

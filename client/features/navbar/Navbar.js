@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { logout } from '../../app/store';
 
 const Navbar = () => {
@@ -12,7 +12,7 @@ const Navbar = () => {
     navigate('/login');
   };
 
-
+  const { id } = useParams()
 
   return (
     <div>
@@ -29,7 +29,7 @@ const Navbar = () => {
               Logout
             </button>
             <Link to="/cart">Cart</Link>
-            <Link to='/userProfile'>UserProfile</Link>
+            <Link to={`/userProfile/${id}`}>UserProfile</Link>
           </div>
         ) : (
           <div>

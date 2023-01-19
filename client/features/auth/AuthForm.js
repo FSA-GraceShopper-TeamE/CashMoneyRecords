@@ -43,11 +43,9 @@ const AuthForm = ({ name, displayName }) => {
     const password = registerPassword;
     const address = registerAddress;
     const isAdmin = false;
-    console.log("SIGNUP---->", formName, email, password, address, isAdmin);
     dispatch(
       authenticate({ email, password, address, isAdmin, method: formName })
     );
-    console.log("dispatch hit");
   };
 
   const handleSubmitLogin = () => {
@@ -55,15 +53,9 @@ const AuthForm = ({ name, displayName }) => {
     const formName = name;
     const email = registerEmail;
     const password = registerPassword;
-    console.log("LOGIN---->", formName, email, password);
     dispatch(authenticate({ email, password, method: formName }));
-    console.log("dispatch hit");
   };
 
-  const switchTabs = () => {
-    console.log("hello");
-    navigate(0);
-  };
 
   if (name === "signup") {
     return (
