@@ -6,6 +6,7 @@ import Home from "../features/Home/Home";
 import { me } from "./store";
 import SingleAlbum from "../features/SingleAlbum/SingleAlbum";
 import Cart from "../features/Cart/Cart.js";
+import Checkout from "../features/Cart/Checkout.js"
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -23,11 +24,13 @@ const AppRoutes = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/albums/:id" element={<SingleAlbum />} />
           <Route path="/*" element={<Home />} />
+          <Route path="checkout" element={<Checkout />} />
         </Routes>
       ) : (
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="checkout" element={<Checkout />} />
           <Route path="/albums/:id" element={<SingleAlbum />} />
           <Route
             path="/login"

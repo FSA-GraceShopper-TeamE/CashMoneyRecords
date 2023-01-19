@@ -1,18 +1,87 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UsaStates } from "usa-states";
+import { useSelector, useDispatch } from "react-redux";
+import { emptyCart } from "./cartSlice";
+
 
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
 
-const states = Object.values(new UsaStates().states).map(
-  ({ abbreviation }) => abbreviation
-);
+
+const Checkout = () => {
+
+
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const states = Object.values(new UsaStates().states).map(
+  ({ abbreviation }) => abbreviation);
 
 const cardTypes = ["VISA", "Mastercard", "American Express"];
 
-const Checkout = () => {
+const [order, setOrder] = useState({})
+
+const validateData = ({
+  email,
+  address1,
+  address2,
+  city,
+  state,
+  zip,
+  cardType,
+  name,
+  cardNumber,
+  CSC,
+}) => {
+  if (
+    !email.length ||
+    !address1.length ||
+    !address2.length ||
+    !city.length ||
+    !zip.length ||
+    !name.length ||
+    !cardNumber.length ||
+    !CSC.length ||
+    state === null ||
+    cardType === null
+  ) {
+    alert('FILL IN ALL REQUIRED FIELDS');
+    return false;
+  }
+  else {
+    const shippingInfo = `${address1} \n ${address2}\n ${city}, ${state} ${zip}`;
+    const billingInfo = `${cardType}: ${cardNumber}, ${name}, ${CSC}`;
+
+    setOrder({
+      shippingInfo : shippingInfo,
+      billingInfo: billingInfo,
+      contactInfo: email,
+      completed : true,
+    })
+
+  }
+  return true
+};
+
+  function handleChange (e) {
+    e.preventDefault();
+  }
+
+   function handleSubmit(e) {
+    e.preventDefault();
+    // dispatch(submitOrder(order));
+    alert('Order Submitted');
+    dispatch(emptyCart());
+    navigate ('/home')
+    }
+
+
   return (
-    <Form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+    <Form onChange={handleChange} onSubmit={handleSubmit}>
       <Row className="mb-3">
         <h2>SHIPPING</h2>
       </Row>
@@ -88,12 +157,13 @@ const Checkout = () => {
         <Button variant="success" type="submit">
           Checkout
         </Button>
-        <Button onClick={toggleCheckout} variant="warning">
+        {/* <Button onClick={toggleCheckout} variant="warning">
           Exit Checkout
-        </Button>
+        </Button> */}
       </Row>
     </Form>
   );
 };
 
 export default Checkout;
+
