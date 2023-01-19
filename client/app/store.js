@@ -3,9 +3,18 @@ import logger from "redux-logger";
 import authReducer from "../features/auth/authSlice";
 import albumsReducer from "../features/Album/albumsSlice";
 import singleAlbumReducer from "../features/singleAlbum/singleAlbumSlice";
-import cartReducer from '../features/Cart/cartSlice'
+import cartReducer from "../features/Cart/cartSlice";
 import storage from "redux-persist/lib/storage";
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
 const persistConfig = {
   key: "root",
@@ -20,7 +29,6 @@ const store = configureStore({
     auth: authReducer,
     albums: albumsReducer,
     singleAlbum: singleAlbumReducer,
-    // cartXXX: cartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

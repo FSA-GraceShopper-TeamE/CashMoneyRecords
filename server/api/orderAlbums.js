@@ -1,15 +1,12 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const {
   models: { OrderAlbum },
-} = require('../db');
-const Order = require('../db/models/Order');
+} = require("../db");
+const Order = require("../db/models/Order");
 module.exports = router;
 
-// PUT /api/orderAlbums (Edit Item From Order)
-router.put('/', async (req, res, next) => {
+router.put("/", async (req, res, next) => {
   try {
-    // requires orderAlbum id in req.body
-    // may also contain price and/or quantity
     const updates = req.body;
     const orderAlbum = await OrderAlbum.findByPk(updates.id);
 
@@ -31,11 +28,8 @@ router.put('/', async (req, res, next) => {
   }
 });
 
-// POST /api/orderAlbums (Add Item To Order)
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
-    // requires orderId, albumId, price & quantity
-    // in req.body
     const item = req.body;
     const newItem = await OrderAlbum.create(item);
     res.json(newItem);
@@ -44,8 +38,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// DELETE /api/orderAlbums/:orderAlbumId (Delete Item From Order)
-router.delete('/:id', async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const id = +req.params.id;
     const item = await OrderAlbum.findByPk(id);

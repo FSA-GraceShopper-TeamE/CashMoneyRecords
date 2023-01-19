@@ -18,7 +18,6 @@ const requireToken = async (req, res, next) => {
   }
 };
 
-// GET /api/users (Get All Users)
 router.get("/", async (req, res, next) => {
   console.log('USER/GET------>')
   console.log('TOKEN')
@@ -32,10 +31,8 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// POST /api/users (Create User)
 router.post("/", requireToken, async (req, res, next) => {
   try {
-    // requires email & password in req.body
     const user = req.body;
     const newUser = await User.create(user);
     res.json(newUser);
@@ -44,10 +41,8 @@ router.post("/", requireToken, async (req, res, next) => {
   }
 });
 
-// PUT /api/users (Edit User)
 router.put("/", requireToken, async (req, res, next) => {
   try {
-    // requires id (of user) in req.body
     const updates = req.body;
     const user = await User.findByPk(updates.id);
 
@@ -56,7 +51,7 @@ router.put("/", requireToken, async (req, res, next) => {
       err.status = 404;
       throw err;
     }
-    // apply updates to user
+  
     Object.entries(updates).forEach(([key, value]) => {
       user[key] = value;
     });
@@ -69,7 +64,6 @@ router.put("/", requireToken, async (req, res, next) => {
   }
 });
 
-// DELETE /api/users/:id (Delete User)
 router.delete("/:id", requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -88,7 +82,6 @@ router.delete("/:id", requireToken, async (req, res, next) => {
   }
 });
 
-// GET /api/users/:userId (Get One User)
 router.get("/:id", requireToken, async (req, res, next) => {
   console.log('1----->hello')
   console.log('REQ--->', res.data.token)
@@ -102,7 +95,6 @@ router.get("/:id", requireToken, async (req, res, next) => {
   }
 });
 
-// GET /api/users/:userId/cart (Get Cart)
 router.get("/:id/cart", requireToken, async (req, res, next) => {
   try {
     const [cart] = await Order.findAll({

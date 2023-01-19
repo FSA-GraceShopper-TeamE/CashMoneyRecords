@@ -29,9 +29,18 @@ const AppRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/albums/:id" element={<SingleAlbum />} />
-          <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
-          <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
-          <Route path="/*" element={<AuthForm name="login" displayName="Login" />} />
+          <Route
+            path="/login"
+            element={<AuthForm name="login" displayName="Login" />}
+          />
+          <Route
+            path="/signup"
+            element={<AuthForm name="signup" displayName="Sign Up" />}
+          />
+          <Route
+            path="/*"
+            element={<AuthForm name="login" displayName="Login" />}
+          />
         </Routes>
       )}
     </div>

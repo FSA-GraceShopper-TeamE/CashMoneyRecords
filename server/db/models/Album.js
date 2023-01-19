@@ -17,9 +17,6 @@ const Album = db.define("album", {
   tracks: {
     type: Sequelize.ARRAY(Sequelize.STRING),
   },
-  staffPick: {
-    type: Sequelize.BOOLEAN,
-  },
   description: {
     type: Sequelize.TEXT,
   },

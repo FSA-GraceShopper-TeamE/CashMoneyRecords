@@ -6,7 +6,6 @@ function Total() {
   const cart = useSelector((state) => state.persistedReducer.cart);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const navigate = useNavigate();
-  //   const { id, title, artistName, price, quantity } = cart;
 
   const getTotal = () => {
     let totalQuantity = 0;
@@ -20,7 +19,7 @@ function Total() {
 
   const handleCheckout = () => {
     isLoggedIn ? navigate("/checkout") : navigate("/login");
-    };
+  };
 
   return (
     <div className="total">
@@ -31,9 +30,9 @@ function Total() {
           <strong>${getTotal().totalPrice}</strong>
         </p>
       </div>
-      <button className="total__button"
-        onClick={() => handleCheckout()}
-      >PROCEED TO CHECKOUT</button>
+      <button className="total__button" onClick={() => handleCheckout()}>
+        PROCEED TO CHECKOUT
+      </button>
     </div>
   );
 }
