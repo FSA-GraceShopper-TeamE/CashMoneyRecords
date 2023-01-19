@@ -1,10 +1,13 @@
 const router = require("express").Router();
+const { token } = require("morgan");
 const {
   models: { User, Order, OrderAlbum, Album },
 } = require("../db");
 module.exports = router;
 
 const requireToken = async (req, res, next) => {
+  console.log('REQUIRE TOKEN FUNCTION')
+  console.log('req.headers.authorization', req.headers)
   try {
     const token = req.headers.authorization;
     const user = await User.findByToken(token);
@@ -16,6 +19,8 @@ const requireToken = async (req, res, next) => {
 };
 
 router.get("/", async (req, res, next) => {
+  console.log('USER/GET------>')
+  console.log('TOKEN')
   try {
     const users = await User.findAll({
       attributes: ["id", "email", "address", "isAdmin"],
@@ -78,8 +83,12 @@ router.delete("/:id", requireToken, async (req, res, next) => {
 });
 
 router.get("/:id", requireToken, async (req, res, next) => {
+  console.log('1----->hello')
+  console.log('REQ--->', res.data.token)
   try {
+    console.log('2---->hello')
     const user = await User.findByToken(req.headers.authorization);
+    console.log('USER---------->', user)
     res.send(user);
   } catch (err) {
     next(err);
