@@ -25,6 +25,8 @@
     "@emotion/styled": "^11.10.5",
     "@faker-js/faker": "^7.6.0",
     "@mui/material": "^5.11.4",
+    "@stripe/react-stripe-js": "^1.16.4",
+    "@stripe/stripe-js": "^1.46.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "bootstrap": "^5.2.3",
@@ -36,8 +38,12 @@
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
     "react-bootstrap": "^2.7.0",
+    "react-bootstrap-buttons": "^1.0.0",
+    "react-bootstrap-form": "^0.1.4-beta6",
+    "react-bootstrap-grid-component": "^0.2.5",
     "redux-persist": "^6.0.0",
     "sequelize": "^6.25.3",
+    "stripe": "^11.6.0",
     "usa-states": "^0.0.6"
   },
   "devDependencies": {
