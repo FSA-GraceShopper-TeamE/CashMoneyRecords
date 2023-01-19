@@ -58,11 +58,12 @@ const AuthForm = ({ name, displayName }) => {
     console.log("LOGIN---->", formName, email, password);
     dispatch(authenticate({ email, password, method: formName }));
     console.log("dispatch hit");
+    navigate('/home')
   };
 
   const switchTabs = () => {
     console.log("hello");
-    navigate(0);
+    // navigate(0);
   };
 
   if (name === "signup") {
